@@ -10,8 +10,14 @@ const inputSearchBox: HTMLInputElement = <HTMLInputElement> document.getElementB
 const totalCreditElm: HTMLElement = document.getElementById("total-credits")!;
 
 let studentTbody: HTMLElement = document.getElementById('student')!;
+const btnMaxMin: HTMLElement = document.getElementById("button-max_min")!;
+const inputMax: HTMLInputElement = <HTMLInputElement> document.getElementById("max")!;
+const inputMin: HTMLInputElement = <HTMLInputElement> document.getElementById("min")!;
+
 
 btnfilterByName.onclick = () => applyFilterByName();
+
+btnMaxMin.onclick = () => applyFilterMaxMin();
 
 renderCoursesInTable(dataCourses);
 renderStudentInTable(dataStudent);
@@ -31,7 +37,7 @@ function renderStudentInTable(students: Student[]): void {
       studentTbody.appendChild(trElement);
       trElement = document.createElement("tr");
       trElement.innerHTML = `<td>Edad</td>
-                             <td>${student.edad}</td>`;
+                             <td>${student.edad} años</td>`;
       studentTbody.appendChild(trElement);
       trElement = document.createElement("tr");
       trElement.innerHTML = `<td>Dirección</td>
@@ -42,7 +48,22 @@ function renderStudentInTable(students: Student[]): void {
                              <td>${student.telefono}</td>`;
       studentTbody.appendChild(trElement);
     });
-  } 
+}
+
+function applyFilterMaxMin() { 
+    let maxi = inputMax.value;
+    let mini = inputMin.value;
+    maxi = (maxi == null) ? '10' : maxi;
+    mini = (mini == null) ? '-1' : mini;
+    clearCoursesInTable();
+    let coursesFiltered: Course[] = searchCreditByMaxMin(mini, maxi, dataCourses);
+    renderCoursesInTable(coursesFiltered);
+}
+
+function searchCreditByMaxMin(valMin: string, valMax: string, courses: Course[]) {
+    return (valMin === '-1' && valMax === '10') ? dataCourses : courses.filter( c => 
+      (c.credits >= parseInt(valMin) && c.credits <= parseInt(valMax)));
+}
 
 function renderCoursesInTable(courses: Course[]): void {
   console.log('Desplegando cursos');
@@ -67,7 +88,6 @@ function searchCourseByName(nameKey: string, courses: Course[]) {
   return nameKey === '' ? dataCourses : courses.filter( c => 
     c.name.match(nameKey));
 }
-
 
 function getTotalCredits(courses: Course[]): number {
   let totalCredits: number = 0;

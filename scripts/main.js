@@ -1,4 +1,5 @@
 import { dataCourses } from './dataCourses.js';
+import { dataStudent } from './dataStudent.js';
 var coursesTbody = document.getElementById('courses');
 var btnfilterByName = document.getElementById("button-filterByName");
 var inputSearchBox = document.getElementById("search-box");
@@ -6,25 +7,26 @@ var totalCreditElm = document.getElementById("total-credits");
 var studentTbody = document.getElementById('student');
 btnfilterByName.onclick = function () { return applyFilterByName(); };
 renderCoursesInTable(dataCourses);
+renderStudentInTable(dataStudent);
 totalCreditElm.innerHTML = "" + getTotalCredits(dataCourses);
 function renderStudentInTable(students) {
     console.log('Desplegando estudiante');
     students.forEach(function (student) {
         var trElement = document.createElement("tr");
         trElement.innerHTML = "<td>C\u00F3digo</td>\n                             <td>" + student.codigo + "</td>";
-        coursesTbody.appendChild(trElement);
+        studentTbody.appendChild(trElement);
         trElement = document.createElement("tr");
         trElement.innerHTML = "<td>C\u00E9dula</td>\n                             <td>" + student.cedula + "</td>";
-        coursesTbody.appendChild(trElement);
+        studentTbody.appendChild(trElement);
         trElement = document.createElement("tr");
         trElement.innerHTML = "<td>Edad</td>\n                             <td>" + student.edad + "</td>";
-        coursesTbody.appendChild(trElement);
+        studentTbody.appendChild(trElement);
         trElement = document.createElement("tr");
         trElement.innerHTML = "<td>Direcci\u00F3n</td>\n                             <td>" + student.direccion + "</td>";
-        coursesTbody.appendChild(trElement);
+        studentTbody.appendChild(trElement);
         trElement = document.createElement("tr");
         trElement.innerHTML = "<td>Tel\u00E9fono</td>\n                             <td>" + student.telefono + "</td>";
-        coursesTbody.appendChild(trElement);
+        studentTbody.appendChild(trElement);
     });
 }
 function renderCoursesInTable(courses) {
