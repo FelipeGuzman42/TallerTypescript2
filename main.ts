@@ -1,8 +1,8 @@
 
 import { Course } from './course.js';
-
-import { dataCourses } from './dataCourses.js';
 import { Student } from './student.js';
+import { dataCourses } from './dataCourses.js';
+import { dataStudent } from './dataStudent.js';
 
 let coursesTbody: HTMLElement = document.getElementById('courses')!;
 const btnfilterByName: HTMLElement = document.getElementById("button-filterByName")!;
@@ -14,6 +14,7 @@ let studentTbody: HTMLElement = document.getElementById('student')!;
 btnfilterByName.onclick = () => applyFilterByName();
 
 renderCoursesInTable(dataCourses);
+renderStudentInTable(dataStudent);
 
 totalCreditElm.innerHTML = `${getTotalCredits(dataCourses)}`
 
@@ -23,23 +24,23 @@ function renderStudentInTable(students: Student[]): void {
       let trElement = document.createElement("tr");
       trElement.innerHTML = `<td>Código</td>
                              <td>${student.codigo}</td>`;
-      coursesTbody.appendChild(trElement);
+      studentTbody.appendChild(trElement);
       trElement = document.createElement("tr");
       trElement.innerHTML = `<td>Cédula</td>
                              <td>${student.cedula}</td>`;
-      coursesTbody.appendChild(trElement);
+      studentTbody.appendChild(trElement);
       trElement = document.createElement("tr");
       trElement.innerHTML = `<td>Edad</td>
                              <td>${student.edad}</td>`;
-      coursesTbody.appendChild(trElement);
+      studentTbody.appendChild(trElement);
       trElement = document.createElement("tr");
       trElement.innerHTML = `<td>Dirección</td>
                              <td>${student.direccion}</td>`;
-      coursesTbody.appendChild(trElement);
+      studentTbody.appendChild(trElement);
       trElement = document.createElement("tr");
       trElement.innerHTML = `<td>Teléfono</td>
                              <td>${student.telefono}</td>`;
-      coursesTbody.appendChild(trElement);
+      studentTbody.appendChild(trElement);
     });
   } 
 
